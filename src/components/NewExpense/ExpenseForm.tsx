@@ -10,9 +10,10 @@ interface ExpenseProps {
 
 interface ExpenseFormProps {
   onSaveExpenseDate: (arg: ExpenseProps) => void;
+  onCancel: () => void;
 }
 
-export function ExpenseForm({ onSaveExpenseDate }: ExpenseFormProps) {
+export function ExpenseForm({ onSaveExpenseDate, onCancel }: ExpenseFormProps) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState(0);
   const [enteredDate, setEnteredDate] = useState("");
@@ -40,7 +41,6 @@ export function ExpenseForm({ onSaveExpenseDate }: ExpenseFormProps) {
     };
 
     onSaveExpenseDate(expenseData);
-
     setEnteredTitle("");
     setEnteredAmount(0);
     setEnteredDate("");
@@ -81,6 +81,9 @@ export function ExpenseForm({ onSaveExpenseDate }: ExpenseFormProps) {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>

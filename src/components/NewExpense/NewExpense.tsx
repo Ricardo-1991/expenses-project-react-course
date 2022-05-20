@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ExpenseForm } from "./ExpenseForm";
 import "./NewExpense.css";
 
@@ -13,13 +14,32 @@ interface ExpenseHandlerProps {
 }
 
 export function NewExpense({ onAddExpenseHandler }: ExpenseHandlerProps) {
+  const [isEditing, setIsEditing] = useState(false);
+
   function saveExpenseDataHandler(enteredExpenseData: ExpenseProps) {
     onAddExpenseHandler(enteredExpenseData);
+    setIsEditing(false);
+  }
+
+  function startEditingHandler() {
+    setIsEditing(true);
+  }
+
+  function stopEditingHandler() {
+    setIsEditing(false);
   }
 
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseDate={saveExpenseDataHandler} />
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseDate={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
     </div>
   );
 }

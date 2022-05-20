@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <NewExpense onAddExpenseHandler={addExpenseHandler} />
-      <Expenses items={expenses} />;
+      <Expenses expensesItems={expenses} />;
     </>
   );
 }
